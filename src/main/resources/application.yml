@@ -1,0 +1,51 @@
+
+spring:
+  datasource:
+      type: com.alibaba.druid.pool.DruidDataSource
+      username: root
+      password: 123456
+      url: jdbc:mysql://13.209.5.79:3306/test?characterEncoding=utf8&useSSL=false
+      driver-class-name: com.mysql.jdbc.Driver
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: -1
+      filters: stat,wall,slf4j,config
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMil=3000
+      useGlobalDataSourceStat: true
+  redis:
+    host: 13.209.5.79
+    port: 6379
+    password: sunhj
+    pool:
+      max-active: 500    #最大激活连接数
+      max-idle: -1      #最大空闲连接数
+      max-wait: 9000    #允许等待秒，9000表示9秒后超时
+      min-idle: 20
+
+server:
+  port: 6868
+
+mybatis:
+    type-aliases-package: com.example.demo.*
+    mapper-locations: classpath:mapper/*.xml
+mapper:
+  mappers:
+    - com.example.demo.common.mapper.MyMapper
+  notEmpty: false
+  identity: MYSQL
+
+pagehelper:
+    helperDialect: mysql
+    reasonable: true    #pageNo<=0时默认为1
+    supportMethodsArguments: true
+    params: count=countSql
+

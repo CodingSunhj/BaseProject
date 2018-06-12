@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--保存路径-->
+    <property name="logback.logdir" value="C:/tmp/log"/>
+    <!--项目名称-->
+    <property name="logback.appname" value="demo"/>
+    <!--单个文件最大值-->
+    <property name="logback.maxFileSize" value="10MB"/>
+    <!--最大保存天数-->
+    <property name="logback.maxHistory" value="10"/>
+    <!--控制台输出-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>DEBUG</level>
+        </filter>
+        <encoder>
+            <!--<charset>GBK</charset>-->
+            <pattern>%d{HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--error级别文件输出-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>Error</level>
+        </filter>
+        <File>${logback.logdir}/error/${logback.appname}.error.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${logback.logdir}/error/${logback.appname}.error.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>${logback.maxHistory}</maxHistory>
+            <maxFileSize>${logback.maxFileSize}</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <!--<charset>GBK</charset>-->
+            <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--debug级别日志输出-->
+    <appender name="fileDebugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <File>${logback.logdir}/debug/${logback.appname}.debug.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${logback.logdir}/debug/${logback.appname}.debug.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>${logback.maxHistory}</maxHistory>
+            <maxFileSize>${logback.maxFileSize}</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <!--<charset>GBK</charset>-->
+            <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!--info级别日志输出-->
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <File>${logback.logdir}/info/${logback.appname}.info.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${logback.logdir}/info/${logback.appname}.info.%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+            <maxHistory>${logback.maxHistory}</maxHistory>
+            <maxFileSize>${logback.maxFileSize}</maxFileSize>
+            <!--<totalSizeCap>1GB</totalSizeCap>-->
+        </rollingPolicy>
+        <encoder>
+            <!--<charset>GBK</charset>-->
+            <pattern>%d [%thread] %-5level %logger{36} %line - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <!--<logger name="com.kakasys" level="DEBUG" additivity="false">-->
+        <!--<appender-ref ref="fileDebugLog"/>-->
+    <!--</logger>-->
+    <root level="DEBUG">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileErrorLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileDebugLog"/>
+    </root>
+
+    <logger name="org.apache.commons" level="ERROR"/>
+    <logger name="org.apache.jasper.servlet.JspServlet" level="ERROR"/>
+    <logger name="com.googlecode.jsonplugin.JSONWriter" level="WARN"/>
+    <logger name="druid.sql.ResultSet" level="WARN"/>
+    <logger name="org.quartz" level="WARN"/>
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="net.sf.ehcache" level="WARN"/>
+
+</configuration>
