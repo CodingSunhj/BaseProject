@@ -51,6 +51,7 @@ public class CommonResultCodeServiceImpl extends BaseMySqlBaseCrudServiceImpl<Co
         if(!StringUtils.isEmpty(resultCodeCondition.getName())){
             criteria.andEqualTo("name",resultCodeCondition.getName());
         }
+        
         return selectPage(pageQO,example);
     }
 

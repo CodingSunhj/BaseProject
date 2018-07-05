@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
  * @author shj
  */
 public enum BusinessExceptionEnum {
-//dd
 	/**
 	 * 无效参数
 	 */

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
@@ -23,7 +24,7 @@ public class UserController {
     private RedisTemplate redisTemplate;
 
     @ApiOperation(value = "测试用户是否通顺",notes = "测试")
-    @GetMapping("user")
+    @PostMapping("user")
     public UserInfo user( UserInfo user){
         if(user.getId()==1){
             int a = 1/0;

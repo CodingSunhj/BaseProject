@@ -1,5 +1,6 @@
 package com.example.demo.business.resultcode.web;
 
+import com.example.demo.annotations.ResponseResult;
 import com.example.demo.business.resultcode.entity.CommonResultCode;
 import com.example.demo.business.resultcode.query.ResultCodeCondition;
 import com.example.demo.business.resultcode.service.CommonResultCodeService;
@@ -24,6 +25,7 @@ import java.util.concurrent.ExecutionException;
  * @author: create by SunHJ
  */
 
+@ResponseResult
 @Api(tags = "维护返回码")
 @RestController
 @RequestMapping("result_code")

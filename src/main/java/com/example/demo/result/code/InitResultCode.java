@@ -21,16 +21,16 @@ public class InitResultCode implements ApplicationRunner{
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
-        Class resultClass = ResultCode.class;
-        Field[] fields = resultClass.getDeclaredFields();
-        for(Field field:fields){
-            CommonResultCode redisResultCode = (CommonResultCode) redisTemplate.opsForValue().get(ResultCodeKey.resultCode.getPrefix()+field.getName());
-            if(redisResultCode==null){
-                continue;
-            }
-            ResultCode resultCode = (ResultCode) field.get(resultClass);
-            resultCode.setMessage(redisResultCode.getMsg());
-        }
+//        Class resultClass = ResultCode.class;
+//        Field[] fields = resultClass.getDeclaredFields();
+//        for(Field field:fields){
+//            CommonResultCode redisResultCode = (CommonResultCode) redisTemplate.opsForValue().get(ResultCodeKey.resultCode.getPrefix()+field.getName());
+//            if(redisResultCode==null){
+//                continue;
+//            }
+//            ResultCode resultCode = (ResultCode) field.get(resultClass);
+//            resultCode.setMessage(redisResultCode.getMsg());
+//        }
     }
 
 

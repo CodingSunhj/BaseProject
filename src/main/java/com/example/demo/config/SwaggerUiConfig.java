@@ -19,7 +19,7 @@ public class SwaggerUiConfig {
                 .apiInfo(apiInfo())
                 .groupName("测试环境")
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.example.demo.business"))
+                .apis(RequestHandlerSelectors.basePackage("com.example"))
                 .paths(PathSelectors.any())
                 .build();
     }

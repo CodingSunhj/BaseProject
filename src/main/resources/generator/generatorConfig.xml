@@ -11,7 +11,7 @@
 
         <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
             <!--可以定义自己的通用mapper接口-->
-            <property name="mappers" value="tk.mybatis.mapper.common.Mapper"/>
+            <property name="mappers" value="com.example.demo.commons.mapper.MyMapper"/>
             <!--是否区分大小写-->
             <property name="caseSensitive" value="false"/>
             <!--是否强制生成注解-->
@@ -40,10 +40,7 @@
                              targetProject="src/test/java"
                              type="XMLMAPPER"/>
 
-        <table tableName="user_info">
-            <generatedKey column="id" sqlStatement="JDBC"/>
-        </table>
-        <table tableName="common_error_codes">
+        <table tableName="common_result_code">
             <generatedKey column="id" sqlStatement="JDBC"/>
         </table>
     </context>

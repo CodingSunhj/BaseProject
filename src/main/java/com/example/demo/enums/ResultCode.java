@@ -20,6 +20,7 @@ public enum ResultCode {
 	PARAM_IS_BLANK(10002, "参数为空"),
 	PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
 	PARAM_NOT_COMPLETE(10004, "参数缺失"),
+	FILE_UPLOAD_PATH_NOT_SETTING(10005,"文件上传路径未设置"),
 
 	/* 用户错误：20001-29999*/
 	USER_NOT_LOGGED_IN(20001, "用户未登录"),
@@ -34,6 +35,9 @@ public enum ResultCode {
 
 	/* 系统错误：40001-49999 */
 	SYSTEM_INNER_ERROR(40001, "系统繁忙，请稍后重试"),
+	FILE_NOT_FOUND(40002,"源文件找不到"),
+	PIC_FORMAT_ERROR(40003,"图片文件格式错误"),
+	EXCEL_FORMAT_ERROR(40004,"Excel文件格式错误"),
 
 	/* 数据错误：50001-599999 */
 	RESULE_DATA_NONE(50001, "数据未找到"),

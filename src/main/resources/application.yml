@@ -4,7 +4,8 @@ spring:
       type: com.alibaba.druid.pool.DruidDataSource
       username: root
       password: 123456
-      url: jdbc:mysql://13.209.5.79:3306/test?characterEncoding=utf8&useSSL=false
+#      url: jdbc:mysql://13.209.5.79:3306/test?characterEncoding=utf8&useSSL=false
+      url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&useSSL=false
       driver-class-name: com.mysql.jdbc.Driver
       initialSize: 5
       minIdle: 5
@@ -21,6 +22,10 @@ spring:
       filters: stat,wall,slf4j,config
       connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMil=3000
       useGlobalDataSourceStat: true
+  http:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
   redis:
     host: 13.209.5.79
     port: 6379
@@ -48,4 +53,13 @@ pagehelper:
     reasonable: true    #pageNo<=0时默认为1
     supportMethodsArguments: true
     params: count=countSql
+
+web:
+  upload:
+    pic:
+      path:  E:\TMP\PIC
+      thumbWidth: 500
+      thumbHeight: 500
+      quality: 0.3
+      scale: 0.3 #等比例压缩，如果存在thumbWidth或者thumbHeight 则此属性失效
 
