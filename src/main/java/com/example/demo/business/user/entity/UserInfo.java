@@ -2,6 +2,8 @@ package com.example.demo.business.user.entity;
 
 import com.example.demo.commons.mapper.SimpleGenId;
 import com.example.demo.commons.model.po.BasePO;
+import io.swagger.annotations.ApiModelProperty;
+import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -17,6 +19,7 @@ public class UserInfo extends BasePO<Long> {
     @Id
     @Column(name = "id")
     @KeySql(genId = SimpleGenId.class)
+    @ApiModelProperty(hidden = true)
     private Long id;
 
     /**

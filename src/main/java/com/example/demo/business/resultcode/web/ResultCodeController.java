@@ -10,7 +10,9 @@ import com.example.demo.enums.ResultCode;
 import com.example.demo.redis.key.ResultCodeKey;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tk.mybatis.mapper.entity.Condition;
@@ -29,7 +31,10 @@ import java.util.concurrent.ExecutionException;
 @Api(tags = "维护返回码")
 @RestController
 @RequestMapping("result_code")
+@Slf4j
 public class ResultCodeController {
+
+
 
     @Autowired
     CommonResultCodeService commonResultCodeService;
@@ -53,7 +58,11 @@ public class ResultCodeController {
     })
     @PostMapping("{code}")
     public void updateMsg(@PathVariable("code") Integer code,String msg){
-        commonResultCodeService.updateMsg(code,msg);
+        try {
+            commonResultCodeService.updateMsg(code, msg);
+        }catch (Exception e){
+            log.error("修改错误...."+e);
+        }
     }
 
 

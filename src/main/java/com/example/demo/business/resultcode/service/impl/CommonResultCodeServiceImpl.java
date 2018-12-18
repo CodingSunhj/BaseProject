@@ -13,6 +13,7 @@ import com.example.demo.redis.key.ResultCodeKey;
 import com.example.demo.utils.StringUtil;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -30,7 +31,7 @@ import java.util.Optional;
  * @author: create by SunHJ
  * @date:2018/6/12 9:38
  */
-
+@Slf4j
 @Service
 public class CommonResultCodeServiceImpl extends BaseMySqlBaseCrudServiceImpl<CommonResultCode, Long> implements CommonResultCodeService {
 
@@ -45,14 +46,14 @@ public class CommonResultCodeServiceImpl extends BaseMySqlBaseCrudServiceImpl<Co
     public PageVO<CommonResultCode> pageCommonResultCode(PageQO pageQO, ResultCodeCondition resultCodeCondition) {
         Example example = new Example(CommonResultCode.class);
         Example.Criteria criteria = example.createCriteria();
-        if(!StringUtils.isEmpty(resultCodeCondition.getCode())){
-            criteria.andEqualTo("code",resultCodeCondition.getCode());
+        if (!StringUtils.isEmpty(resultCodeCondition.getCode())) {
+            criteria.andEqualTo("code", resultCodeCondition.getCode());
         }
-        if(!StringUtils.isEmpty(resultCodeCondition.getName())){
-            criteria.andEqualTo("name",resultCodeCondition.getName());
+        if (!StringUtils.isEmpty(resultCodeCondition.getName())) {
+            criteria.andEqualTo("name", resultCodeCondition.getName());
         }
-        
-        return selectPage(pageQO,example);
+
+        return selectPage(pageQO, example);
     }
 
     @Override
@@ -90,18 +91,18 @@ public class CommonResultCodeServiceImpl extends BaseMySqlBaseCrudServiceImpl<Co
     public int updateMsg(Integer code, String msg) {
         Example example = new Example(CommonResultCode.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andEqualTo("code",code);
-
+        criteria.andEqualTo("code", code);
         CommonResultCode commonResultCode = commonResultCodeMapper.selectOneByExample(example);
         commonResultCode.setMsg(msg);
-        redisTemplate.opsForValue().set(ResultCodeKey.resultCode.getPrefix()+ commonResultCode.getName(), commonResultCode);
+        redisTemplate.opsForValue().set(ResultCodeKey.resultCode.getPrefix() + commonResultCode.getName(), commonResultCode);
         try {
             Field field = ResultCode.class.getField(commonResultCode.getName());
             ResultCode resultCode = (ResultCode) field.get(ResultCode.class);
             resultCode.setMessage(msg);
+            return updateByPkSelective(commonResultCode.getId(), commonResultCode);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        return updateByPkSelective(commonResultCode.getId(),commonResultCode);
+        return -1;
     }
 }

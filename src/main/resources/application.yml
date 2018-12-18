@@ -27,7 +27,8 @@ spring:
       max-file-size: 10MB
       max-request-size: 10MB
   redis:
-    host: 13.209.5.79
+#    host: 13.209.5.79
+    host: 127.0.0.1
     port: 6379
     password: sunhj
     pool:

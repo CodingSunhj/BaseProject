@@ -57,11 +57,10 @@
     </appender>
 
     <!--info级别日志输出-->
+    <!--根据实际情况，希望info日志中也输出error的信息，使用ThresholdFilter-->
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
-            <onMatch>ACCEPT</onMatch>
-            <onMismatch>DENY</onMismatch>
         </filter>
         <File>${logback.logdir}/info/${logback.appname}.info.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
@@ -80,9 +79,9 @@
     <!--</logger>-->
     <root level="DEBUG">
         <appender-ref ref="console"/>
-        <appender-ref ref="fileErrorLog"/>
-        <appender-ref ref="fileInfoLog"/>
         <appender-ref ref="fileDebugLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
     </root>
 
     <logger name="org.apache.commons" level="ERROR"/>
